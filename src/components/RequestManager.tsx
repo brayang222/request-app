@@ -5,9 +5,10 @@ import { getData } from "@/store/getData";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Request } from "@/types/request";
 
 export const RequestManager = () => {
-  const [request, setRequest] = useState<any[]>([]);
+  const [request, setRequest] = useState<Request[]>([]);
 
   const router = useRouter();
 
