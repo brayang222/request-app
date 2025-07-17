@@ -74,7 +74,7 @@ export function RequestTable({ requests }: Props) {
                 <p className="text-muted-foreground max-w-md text-center mb-4 text-wrap">
                   Actualmente no hay solicitudes registradas en el sistema.
                   Puedes crear una nueva solicitud haciendo clic en el botón
-                  "Nueva solicitud".
+                  &quot;Crea nueva solicitud&quot;.
                 </p>
                 <Button
                   onClick={() => router.push("/form")}
