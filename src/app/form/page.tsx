@@ -1,5 +1,7 @@
-import React from "react";
+import EquipmentForm from "@/components/EquipmentForm";
 
-export const Form = () => {
-  return <div>Form</div>;
+const Form = () => {
+  return <EquipmentForm />;
 };
+
+export default Form;

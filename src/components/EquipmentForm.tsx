@@ -1,42 +1,22 @@
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+"use client";
+import { ArrowLeft, ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
+import { useEquipmentForm } from "@/hooks/useEquipmentForm";
 
-interface Props {
-  onSubmit: (data: any) => void;
-}
-
-const EquipmentForm = ({ onSubmit }: Props) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    position: "",
-    equipment: "",
-    justification: "",
-  });
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit(formData);
-    console.log("Form submitted:", formData);
-    // setFormData({ name: "", position: "", equipment: "", justification: "" });
-  };
+const EquipmentForm = () => {
+  const router = useRouter();
+  const { formData, handleInputChange, handleSubmit, submitAndRedirect } =
+    useEquipmentForm();
 
   return (
     <section className="min-h-screen bg-gradient-background flex items-center justify-center p-4">
       <div className="w-full max-w-md animate-fade-in bg-card shadow-elegant rounded-2xl p-8 space-y-6 border border-border/50 backdrop-blur-sm">
+        <Button className="cursor-pointer" onClick={() => router.push("/")}>
+          <ArrowLeft />
+        </Button>
         <div className="text-center space-y-2">
-          <h2 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+          <h2 className="text-3xl font-bold bg-black bg-clip-text text-transparent">
             Solicitud de Equipo
           </h2>
           <p className="text-muted-foreground">
@@ -45,10 +25,7 @@ const EquipmentForm = ({ onSubmit }: Props) => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div
-            className="space-y-2 animate-slide-up"
-            style={{ animationDelay: "0.1s" }}
-          >
+          <div className="space-y-2 animate-slide-up">
             <label
               htmlFor="name"
               className="block text-sm font-semibold text-foreground"
@@ -67,10 +44,7 @@ const EquipmentForm = ({ onSubmit }: Props) => {
             />
           </div>
 
-          <div
-            className="space-y-2 animate-slide-up"
-            style={{ animationDelay: "0.2s" }}
-          >
+          <div className="space-y-2 animate-slide-up">
             <label
               htmlFor="position"
               className="block text-sm font-semibold text-foreground"
@@ -89,10 +63,7 @@ const EquipmentForm = ({ onSubmit }: Props) => {
             />
           </div>
 
-          <div
-            className="space-y-2 animate-slide-up"
-            style={{ animationDelay: "0.3s" }}
-          >
+          <div className="space-y-2 animate-slide-up">
             <label
               htmlFor="equipment"
               className="block text-sm font-semibold text-foreground"
@@ -122,16 +93,13 @@ const EquipmentForm = ({ onSubmit }: Props) => {
                   }
                 )}
               </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-auto">
                 <ChevronDown />
               </div>
             </div>
           </div>
 
-          <div
-            className="space-y-2 animate-slide-up"
-            style={{ animationDelay: "0.4s" }}
-          >
+          <div className="space-y-2">
             <label
               htmlFor="justification"
               className="block text-sm font-semibold text-foreground"
@@ -147,23 +115,28 @@ const EquipmentForm = ({ onSubmit }: Props) => {
               className="w-full px-4 py-3 bg-input border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent resize-none transition-all duration-200 hover:shadow-soft"
               placeholder="Explique detalladamente por qué necesita este equipo y cómo lo utilizará en sus funciones laborales..."
               required
+              minLength={10}
             />
           </div>
 
-          <div className="animate-slide-up" style={{ animationDelay: "0.5s" }}>
+          <div className="flex flex-col gap-4">
             <button
               type="submit"
               className="cursor-pointer bg-black w-full bg-gradient-primary text-primary-foreground py-3 px-6 rounded-xl font-semibold shadow-elegant hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              📩 Enviar Solicitud
+              📩 Enviar
+            </button>
+            <button
+              type="submit"
+              className="cursor-pointer bg-black w-full bg-gradient-primary text-primary-foreground py-3 px-6 rounded-xl font-semibold shadow-elegant hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
+              onClick={submitAndRedirect}
+            >
+              📩 Enviar y volver
             </button>
           </div>
         </form>
 
-        <div
-          className="text-center text-xs text-muted-foreground animate-slide-up"
-          style={{ animationDelay: "0.6s" }}
-        >
+        <div className="text-center text-xs text-muted-foreground">
           <p>Todos los campos son obligatorios</p>
         </div>
       </div>

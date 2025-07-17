@@ -14,12 +14,12 @@ interface Props {
   requests: Request[];
 }
 
-export function TableDemo({ requests }: Props) {
+export function RequestTable({ requests }: Props) {
   return (
-    <Table>
+    <Table className="border-2 border-black mt-8">
       <TableCaption>Lista de solicitudes de herramientas.</TableCaption>
       <TableHeader>
-        <TableRow>
+        <TableRow className="*:font-bold">
           <TableHead className="w-[100px]">Nombre</TableHead>
           <TableHead>Cargo</TableHead>
           <TableHead>Herramienta</TableHead>
@@ -28,19 +28,35 @@ export function TableDemo({ requests }: Props) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {requests.map((request, i) => (
-          <TableRow key={i}>
-            <TableCell className="font-medium">{request.name}</TableCell>
-            <TableCell>{request.position}</TableCell>
-            <TableCell>{request.equipment}</TableCell>
-            <TableCell>{request.justification}</TableCell>
-            <TableCell className="text-right">{request.date}</TableCell>
+        {requests.length > 0 ? (
+          requests.map((request, i) => (
+            <TableRow key={i} className="">
+              <TableCell className="font-medium">{request.name}</TableCell>
+              <TableCell className="text-muted-foreground">
+                {request.position}
+              </TableCell>
+              <TableCell>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                  {request.equipment}
+                </span>
+              </TableCell>
+              <TableCell>{request.justification}</TableCell>
+              <TableCell className="text-right text-muted-foreground">
+                {request.date}
+              </TableCell>
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableCell className="text-muted-foreground">
+              Aún no hay solicitudes para mostrar...
+            </TableCell>
           </TableRow>
-        ))}
+        )}
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={4}>Productos totales</TableCell>
+          <TableCell colSpan={4}>Solicitudes totales</TableCell>
           <TableCell className="text-right">{requests.length}</TableCell>
         </TableRow>
       </TableFooter>
