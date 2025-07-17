@@ -11,15 +11,14 @@ import {
 import { Request } from "../types/request";
 import { Inbox, Plus } from "lucide-react";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 interface Props {
   requests: Request[];
+  router: AppRouterInstance;
 }
 
-export function RequestTable({ requests }: Props) {
-  const router = useRouter();
-
+export function RequestTable({ requests, router }: Props) {
   return (
     <Table className="border-2 border-black mt-8">
       {requests.length > 0 ? (

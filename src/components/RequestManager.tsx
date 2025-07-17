@@ -38,7 +38,7 @@ export const RequestManager = () => {
             Nueva Solicitud
           </Button>
         </div>
-        <RequestTable requests={request} />
+        <RequestTable requests={request} router={router} />
       </div>
     </div>
   );
