@@ -1,13 +1,16 @@
 "use client";
 import { ArrowLeft, ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { useEquipmentForm } from "@/hooks/useEquipmentForm";
 
 const EquipmentForm = () => {
-  const router = useRouter();
-  const { formData, handleInputChange, handleSubmit, submitAndRedirect } =
-    useEquipmentForm();
+  const {
+    formData,
+    handleInputChange,
+    handleSubmit,
+    submitAndRedirect,
+    router,
+  } = useEquipmentForm();
 
   return (
     <section className="min-h-screen bg-gradient-background flex items-center justify-center p-4">

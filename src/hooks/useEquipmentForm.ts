@@ -49,5 +49,6 @@ export const useEquipmentForm = () => {
     handleInputChange,
     handleSubmit,
     submitAndRedirect,
+    router,
   };
 };
